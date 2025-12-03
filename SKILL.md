@@ -72,7 +72,8 @@ elevation: 0  // Flat design
 ElevatedButton(child: Text(T.click))  // Let Theme handle styling
 ```
 
-
+## Components 
+- For all of the `Comic` widgets must be saved in `./lib/widgets/theme/comic_<component_name>.dart` 
 
 ## Button Styles
   - Must use the reusable `ComicButton` at `./lib/widgets/theme/comic_button.dart` widget for all buttons.
@@ -86,6 +87,14 @@ ElevatedButton(child: Text(T.click))  // Let Theme handle styling
   - The ComicButton has the following UI options:
     - `important`: bool - The text style is `labelLarge` if true, otherwise `bodyLarge`.
 
+
+### TextFormField Styles
+  - Must use the reusable `ComicTextFormField` for all TextFormField. 
+    - If the widget does not exists, create it with the following Comic design principles 
+      - Border thickness: 2.0
+      - No elevation
+      - No shadow
+      - Rounded corners: 12
 
 
 # Scripts
