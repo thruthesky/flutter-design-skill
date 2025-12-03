@@ -24,14 +24,24 @@ description: This skill provides the Comic style UI design guideline and code to
 - Follow these critical design rules when implementing the Comic style UI in Flutter.
 
 - **Reusable Flutter Widgets**: Always re-use or create a re-usable widgets to not repeat code.
+  - For example, create a `./lib/widgets/theme/ComicButton` widget instead of styling each button individually.
+  - It must create re-usable widgets for common UI elements like buttons, cards, text fields, etc.
 
 - **Comic Design**: Always follow these Comic design principles:
-    - Thin borders
-    - NO shadows
-    - No elevation
-    - Outline with outline color
-    - Rounded corners
-    - Use the Theme Background Color of the surface color.
+    - **Border**: The border must be `2.0` thickness.
+    - **No shadow**: Always no shadows
+    - **No elevation**: Always zero elevation
+    - **Outline**: Use outline color for borders
+    - **Rounded corners**: The border radius must be `12` for large elements, `8` for other elements.
+    - **Colors**: Use the Theme Primary Color for primary elements.
+      - Use the Theme Secondary Color for secondary elements.
+      - Use the Theme Surface Color for cards and containers.
+      - Use the Theme Background Color for the surface color.
+      - Use the Theme onSurface Color for text and icons on surface color.
+    - **Fonts**: Use the Theme Text Styles for all text elements.
+      - Use `bodyLarge` for regular text.
+      - Use `titleMedium` for titles.
+      - Use `labelLarge` for buttons.
 
 - **Spacing**: Use multiples of 8 (8, 16, 24, 32, etc.)
 
@@ -65,7 +75,16 @@ ElevatedButton(child: Text(T.click))  // Let Theme handle styling
 
 
 ## Button Styles
-  - Thin border, no elevation, no shadow, rounded corners.
+  - Must use the reusable `ComicButton` at `./lib/widgets/theme/comic_button.dart` widget for all buttons.
+    - If the widget does not exist, create it following the Comic design principles:
+      - Border thickness: 2.0
+      - No elevation
+      - No shadow
+      - Rounded corners: 12 for large elements, 8 for other elements
+      - Use Theme colors for background, foreground, and border
+      - Use Theme text styles for button text
+  - The ComicButton has the following UI options:
+    - `important`: bool - The text style is `labelLarge` if true, otherwise `bodyLarge`.
 
 
 
