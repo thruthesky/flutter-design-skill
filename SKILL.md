@@ -13,8 +13,6 @@ description: This skill provides the Comic style UI design guideline and code to
 - Use this skill when the user mention Comic style UI design.
 
 
-
-
 # Design Guidelines
 
 - Refer to the [comic-theme.md](./comic-theme.md) for detailed design guidelines and code examples.
