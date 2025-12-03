@@ -12,6 +12,9 @@ This theme uses the following design principles:
 - Rounded corners with comic style border radius.
 
 
+
+## Comic Theme Code Example
+
 ```dart
 import 'package:easy_design_system/easy_design_system.dart';
 import 'package:flutter/material.dart';
