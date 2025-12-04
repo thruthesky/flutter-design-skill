@@ -29,7 +29,9 @@ description: This skill provides the Comic style UI design guideline and code to
 
 - **Comic Design**: Always follow these Comic design principles:
 
-  - **Border**: The border must be `2.0` thickness.
+  - **Border**:
+    - Standard elements: `2.0` thickness
+    - List-based widgets (ListTile, compact cards): `1.0` thickness for lighter visual weight
   - **No shadow**: Always no shadows
   - **No elevation**: Always zero elevation
   - **Outline**: Use outline color for borders
@@ -189,6 +191,42 @@ ComicSecondaryButton(
 
 All ComicButton widgets are defined in:
 `./lib/widgets/theme/comic_button.dart`
+
+# List-Based Widgets Design
+
+For list-based content such as `ListTile` and `Compact Cards`:
+
+## Design Principles
+
+- **Border**: Use `1.0` thickness (thinner than standard 2.0) for lighter visual weight in compact lists
+- **Border Radius**: `12` for rounded corners
+- **Elevation**: `0` (no shadow)
+- **Margin**: `EdgeInsets.zero` (parent controls spacing)
+- **Colors**: Use Theme colors (surface, outline, onSurface)
+
+### Key Features
+
+```dart
+Card(
+  elevation: 0, // Comic Design: no shadow
+  margin: EdgeInsets.zero, // No margin (parent controls spacing)
+  color: Theme.of(context).colorScheme.surface,
+  // Comic Design: thinner border with rounded corners for compact list
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(12),
+    side: BorderSide(
+      color: Theme.of(context).colorScheme.outline,
+      width: 1.0, // Thinner border for list items
+    ),
+  ),
+  child: InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(12), // Match card radius for ripple
+    child: // ... content
+  ),
+)
+```
+
 
 # Scripts
 
