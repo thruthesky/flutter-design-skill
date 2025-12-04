@@ -192,6 +192,177 @@ ComicSecondaryButton(
 All ComicButton widgets are defined in:
 `./lib/widgets/theme/comic_button.dart`
 
+# ComicTextFormField
+
+## Concept & Intent
+
+The **ComicTextFormField** is a reusable text input component that implements the Comic design language. It provides a consistent way to create text input fields across the entire Flutter application with Comic-style borders, proper spacing, and theme integration.
+
+**Key Benefits:**
+
+- **Consistency**: All text fields share the same Comic design DNA (2px border, no shadow, rounded corners)
+- **Flexibility**: Extensive customization options while maintaining Comic design principles
+- **Maintainability**: Change the text field style in one place, update everywhere
+- **Theme Integration**: Automatically uses Theme colors and text styles
+
+## Design Principles
+
+All ComicTextFormField instances follow these Comic design rules:
+
+- **Border**: 1.0px thickness with outline color (customizable) - lighter weight for compact input fields
+- **Elevation**: Always 0 (flat design, no shadows)
+- **Corners**: Rounded with borderRadius 12 (customizable)
+- **Colors**: Theme-based (surface background, outline border, primary focus, error)
+- **Typography**: Theme text styles (bodyLarge for content, bodyMedium for label/hint)
+- **Spacing**: Content padding in multiples of 8
+
+## Key Features
+
+- **Full TextFormField API**: Supports all standard TextFormField parameters
+- **Customizable Borders**: Configure border color, focus color, error color, width, and radius
+- **Theme Integration**: Uses Theme colors for all visual elements
+- **Validation Support**: Built-in validator and error text display
+- **Input Control**: Supports read-only, enabled/disabled, obscure text, keyboard type
+- **Icons**: Prefix and suffix icon support
+- **Multi-line**: Configurable min/max lines for single or multi-line input
+- **Length Control**: Maximum length with counter
+
+## Usage Examples
+
+### Basic Text Field
+
+```dart
+ComicTextFormField(
+  controller: _nameController,
+  labelText: T.fullName,
+  hintText: T.fullNameHint,
+)
+```
+
+### Password Field
+
+```dart
+ComicTextFormField(
+  controller: _passwordController,
+  labelText: T.password,
+  hintText: T.enterPassword,
+  obscureText: true,
+  prefixIcon: Icon(Icons.lock),
+)
+```
+
+### With Validation
+
+```dart
+ComicTextFormField(
+  controller: _emailController,
+  labelText: T.email,
+  hintText: T.enterEmail,
+  keyboardType: TextInputType.emailAddress,
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return T.emailRequired;
+    }
+    return null;
+  },
+)
+```
+
+### Multi-line Text Area
+
+```dart
+ComicTextFormField(
+  controller: _bioController,
+  labelText: T.bio,
+  hintText: T.enterBio,
+  maxLines: 5,
+  minLines: 3,
+  maxLength: 500,
+)
+```
+
+### Disabled Field
+
+```dart
+ComicTextFormField(
+  controller: _nicknameController,
+  labelText: T.nickname,
+  hintText: T.nicknameHint,
+  enabled: false, // or readOnly: true
+)
+```
+
+## Customization Options
+
+### Border Styling
+
+```dart
+ComicTextFormField(
+  controller: _controller,
+  labelText: T.label,
+  // Custom border styling
+  borderWidth: 1.0,        // Default: 1.0
+  borderRadius: 12,        // Default: 12
+  borderColor: Colors.grey,
+  focusedBorderColor: Colors.blue,
+  errorBorderColor: Colors.red,
+)
+```
+
+### Content Padding
+
+```dart
+ComicTextFormField(
+  controller: _controller,
+  labelText: T.label,
+  // Custom padding (default: symmetric horizontal: 16, vertical: 16)
+  contentPadding: EdgeInsets.all(20),
+)
+```
+
+## Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| controller | TextEditingController? | null | Text field controller |
+| labelText | String? | null | Label text displayed above input |
+| hintText | String? | null | Hint text shown when empty |
+| errorText | String? | null | Error message to display |
+| prefixIcon | Widget? | null | Icon at the start of the field |
+| suffixIcon | Widget? | null | Icon at the end of the field |
+| keyboardType | TextInputType? | null | Keyboard type for input |
+| obscureText | bool | false | Hide text for passwords |
+| onChanged | ValueChanged<String>? | null | Callback when text changes |
+| onFieldSubmitted | ValueChanged<String>? | null | Callback on submit |
+| validator | String? Function(String?)? | null | Validation function |
+| readOnly | bool | false | Prevent editing |
+| enabled | bool | true | Enable/disable field |
+| maxLines | int? | 1 | Maximum lines |
+| minLines | int? | null | Minimum lines |
+| maxLength | int? | null | Maximum characters |
+| autofocus | bool | false | Auto focus on load |
+| borderColor | Color? | null | Border color (default: outline) |
+| focusedBorderColor | Color? | null | Focus border (default: primary) |
+| errorBorderColor | Color? | null | Error border (default: error) |
+| borderWidth | double | 1.0 | Border thickness |
+| borderRadius | double | 12 | Corner radius |
+| contentPadding | EdgeInsetsGeometry? | null | Internal padding |
+
+## Border States
+
+ComicTextFormField automatically handles five border states:
+
+1. **Enabled Border**: Default state (outline color, 1.0px)
+2. **Focused Border**: When field has focus (primary color, 1.0px)
+3. **Error Border**: When validation fails (error color, 1.0px)
+4. **Focused Error Border**: Error state with focus (error color, 1.0px)
+5. **Disabled Border**: When field is disabled (outline with 50% opacity, 1.0px)
+
+## File Location
+
+ComicTextFormField is defined in:
+`./lib/widgets/theme/comic_text_form_field.dart`
+
 # List-Based Widgets Design
 
 For list-based content such as `ListTile` and `Compact Cards`:
@@ -333,6 +504,180 @@ showModalBottomSheet(
 - Use `Flexible` wrapper for scrollable content (ListView, GridView, etc.)
 - Use `shrinkWrap: true` for ListView to allow proper sizing
 - Add appropriate spacing (multiples of 8) around content
+
+# Comic AppBar Design
+
+## Concept & Intent
+
+The **Comic AppBar** implements the Comic design language for app bars and header sections. It provides consistent styling with a characteristic 2.0px bottom border using the outline color, creating a clear visual separation between the header and content areas.
+
+## Design Principles
+
+- **Border**: 2.0px bottom border with outline color
+- **Typography**: Use Theme titleLarge text style for titles
+- **Height**: Standard AppBar height (56px) or custom heights for special cases
+- **Colors**: Theme-based (surface background, outline border, onSurface text)
+- **No Elevation**: Always 0 (flat design, no shadows)
+
+## Usage Patterns
+
+### Pattern 1: Standard Scaffold AppBar
+
+Use this pattern when you have a `Scaffold` widget with an `appBar` property.
+
+```dart
+Scaffold(
+  appBar: AppBar(
+    title: Text(T.editProfile, style: theme.textTheme.titleLarge),
+    bottom: PreferredSize(
+      preferredSize: const Size.fromHeight(1),
+      child: Container(height: 2, color: scheme.outline),
+    ),
+  ),
+  body: // Your content here
+)
+```
+
+**Key Features:**
+- Uses standard `AppBar` widget
+- Title uses `titleLarge` text style from Theme
+- Bottom border achieved using `PreferredSize` with 2.0px height Container
+- Border color uses Theme `outline` color
+
+### Pattern 2: Custom Header (Without Scaffold)
+
+Use this pattern when you need an app bar-like header without a Scaffold (e.g., in special layouts, custom scrolling views, or nested navigation).
+
+```dart
+SafeArea(
+  child: Container(
+    height: 56, // Standard AppBar height
+    padding: const EdgeInsets.only(right: 4, left: 12),
+    decoration: BoxDecoration(
+      border: Border(
+        bottom: BorderSide(
+          // Comic Design: 2.0px border with outline color
+          color: Theme.of(context).colorScheme.outline,
+          width: 2.0,
+        ),
+      ),
+    ),
+    child: Row(
+      children: [
+        // Title
+        Expanded(
+          child: Text(
+            T.pageTitle,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.w600),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        // Action buttons (optional)
+        IconButton(
+          icon: const FaIcon(FontAwesomeIcons.someIcon),
+          onPressed: () {
+            // Action handler
+          },
+        ),
+      ],
+    ),
+  ),
+)
+```
+
+**Key Features:**
+- Uses `Container` with bottom border decoration
+- Wrapped in `SafeArea` for proper top spacing
+- Height set to 56px (standard AppBar height)
+- Padding adjusts for left/right spacing
+- Border applied only to bottom (2.0px with outline color)
+- Title uses `titleLarge` text style
+- Supports action buttons via `IconButton` or other widgets
+
+## Design Specifications
+
+| Property | Value | Description |
+|----------|-------|-------------|
+| **Height** | 56px | Standard AppBar height |
+| **Border Position** | Bottom only | Visual separation from content |
+| **Border Width** | 2.0px | Comic standard thickness |
+| **Border Color** | `colorScheme.outline` | Theme outline color |
+| **Title Style** | `titleLarge` | Theme text style |
+| **Elevation** | 0 | Flat design (no shadow) |
+| **Padding** | Left: 12px, Right: 4px | Balanced spacing for text and icons |
+
+## When to Use Each Pattern
+
+### Use Pattern 1 (Scaffold AppBar) when:
+- Building a standard screen with Scaffold
+- Need standard AppBar features (back button, actions, etc.)
+- Want Flutter's built-in AppBar behavior
+
+### Use Pattern 2 (Custom Header) when:
+- Working without a Scaffold widget
+- Building custom scrolling layouts
+- Creating nested navigation structures
+- Need more control over header layout and behavior
+- Implementing complex header interactions (e.g., dropdown menus, category pickers)
+
+## Example: Header with Action Buttons
+
+```dart
+SafeArea(
+  child: Container(
+    height: 56,
+    padding: const EdgeInsets.only(right: 4, left: 12),
+    decoration: BoxDecoration(
+      border: Border(
+        bottom: BorderSide(
+          color: Theme.of(context).colorScheme.outline,
+          width: 2.0,
+        ),
+      ),
+    ),
+    child: Row(
+      children: [
+        Expanded(
+          child: Text(
+            T.categories,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.w600),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        IconButton(
+          icon: const FaIcon(FontAwesomeIcons.penToSquare),
+          onPressed: () {
+            // Create new item
+          },
+        ),
+        IconButton(
+          icon: const FaIcon(FontAwesomeIcons.chevronDown),
+          onPressed: () {
+            // Show dropdown menu
+          },
+        ),
+      ],
+    ),
+  ),
+)
+```
+
+## Best Practices
+
+- **Always** use Theme colors (outline for border, titleLarge for text)
+- **Always** set border width to 2.0px for consistency
+- **Always** apply border only to the bottom (not top/left/right)
+- **Always** use SafeArea when implementing custom headers
+- **Never** add elevation or shadows
+- Use `overflow: TextOverflow.ellipsis` for long titles
+- Use multiples of 8 for padding and spacing
+- Maintain 56px height for consistency with standard AppBar
 
 
 # Scripts
