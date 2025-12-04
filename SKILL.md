@@ -692,12 +692,12 @@ All Comic SnackBars follow these design rules:
 - **Border**: 2.0px thickness with semantic colors (green, red, blue, orange)
 - **Elevation**: Always 0 (flat design, no shadows)
 - **Corners**: Rounded with borderRadius 12
-- **Colors**: Semantic colors for instant recognition:
-  - Success: Green border (#4CAF50) on light green background (#E8F5E9)
-  - Error: Red border (#F44336) on light red background (#FFEBEE)
-  - Info: Blue border (#2196F3) on light blue background (#E3F2FD)
-  - Warning: Orange border (#FF9800) on light orange background (#FFF3E0)
-- **Typography**: Theme bodyMedium text style with dark colored text for readability
+- **Colors**: Semantic colors with lower contrast for softer appearance:
+  - Success: Medium green border (#66BB6A) on very light green background (#F1F8F4)
+  - Error: Medium red border (#EF5350) on very light red background (#FFF5F5)
+  - Info: Medium blue border (#42A5F5) on very light blue background (#F3F8FC)
+  - Warning: Medium orange border (#FFA726) on very light orange background (#FFF8F0)
+- **Typography**: Theme bodyMedium text style with medium-tone colored text for comfortable readability
 - **Spacing**: Padding and margins in multiples of 8
 - **Behavior**: Floating style with proper margins
 
@@ -718,9 +718,9 @@ showComicSuccessSnackBar(context, T.profileUpdateSuccess);
 - Action completed successfully
 
 **Visual Style:**
-- Background: Light green (#E8F5E9)
-- Text: Dark green (#1B5E20)
-- Border: Green (#4CAF50, 2.0px)
+- Background: Very light green (#F1F8F4)
+- Text: Medium dark green (#2E7D32)
+- Border: Medium green (#66BB6A, 2.0px)
 
 ### showComicErrorSnackBar
 
@@ -737,9 +737,9 @@ showComicErrorSnackBar(context, T.nicknameRequired);
 - API errors
 
 **Visual Style:**
-- Background: Light red (#FFEBEE)
-- Text: Dark red (#B71C1C)
-- Border: Red (#F44336, 2.0px)
+- Background: Very light red (#FFF5F5)
+- Text: Medium dark red (#C62828)
+- Border: Medium red (#EF5350, 2.0px)
 
 ### showComicInfoSnackBar
 
@@ -756,9 +756,9 @@ showComicInfoSnackBar(context, T.pleaseWait);
 - Neutral messages
 
 **Visual Style:**
-- Background: Light blue (#E3F2FD)
-- Text: Dark blue (#0D47A1)
-- Border: Blue (#2196F3, 2.0px)
+- Background: Very light blue (#F3F8FC)
+- Text: Medium dark blue (#1565C0)
+- Border: Medium blue (#42A5F5, 2.0px)
 
 ### showComicWarningSnackBar
 
@@ -775,9 +775,9 @@ showComicWarningSnackBar(context, T.pleaseCheckInput);
 - Non-critical issues
 
 **Visual Style:**
-- Background: Light orange (#FFF3E0)
-- Text: Dark orange (#E65100)
-- Border: Orange (#FF9800, 2.0px)
+- Background: Very light orange (#FFF8F0)
+- Text: Medium dark orange (#EF6C00)
+- Border: Medium orange (#FFA726, 2.0px)
 
 ## Usage Examples
 
