@@ -679,6 +679,203 @@ SafeArea(
 - Use multiples of 8 for padding and spacing
 - Maintain 56px height for consistency with standard AppBar
 
+# Comic SnackBar
+
+## Concept & Intent
+
+The **Comic SnackBar** system provides helper functions to display notification messages that follow Comic design principles. Instead of using the standard `ScaffoldMessenger.of(context).showSnackBar()` with inline styling, use the pre-built Comic SnackBar functions for consistent, theme-based notifications.
+
+## Design Principles
+
+All Comic SnackBars follow these design rules:
+
+- **Border**: 2.0px thickness with semantic colors (green, red, blue, orange)
+- **Elevation**: Always 0 (flat design, no shadows)
+- **Corners**: Rounded with borderRadius 12
+- **Colors**: Semantic colors for instant recognition:
+  - Success: Green border (#4CAF50) on light green background (#E8F5E9)
+  - Error: Red border (#F44336) on light red background (#FFEBEE)
+  - Info: Blue border (#2196F3) on light blue background (#E3F2FD)
+  - Warning: Orange border (#FF9800) on light orange background (#FFF3E0)
+- **Typography**: Theme bodyMedium text style with dark colored text for readability
+- **Spacing**: Padding and margins in multiples of 8
+- **Behavior**: Floating style with proper margins
+
+## Available Functions
+
+### showComicSuccessSnackBar
+
+Displays a success message with green color scheme.
+
+```dart
+showComicSuccessSnackBar(context, T.profileUpdateSuccess);
+```
+
+**Use Cases:**
+- Form submission success
+- Profile update success
+- Data saved successfully
+- Action completed successfully
+
+**Visual Style:**
+- Background: Light green (#E8F5E9)
+- Text: Dark green (#1B5E20)
+- Border: Green (#4CAF50, 2.0px)
+
+### showComicErrorSnackBar
+
+Displays an error message with red color scheme.
+
+```dart
+showComicErrorSnackBar(context, T.nicknameRequired);
+```
+
+**Use Cases:**
+- Validation errors
+- Failed operations
+- Required field warnings
+- API errors
+
+**Visual Style:**
+- Background: Light red (#FFEBEE)
+- Text: Dark red (#B71C1C)
+- Border: Red (#F44336, 2.0px)
+
+### showComicInfoSnackBar
+
+Displays an informational message with blue color scheme.
+
+```dart
+showComicInfoSnackBar(context, T.pleaseWait);
+```
+
+**Use Cases:**
+- Informational messages
+- Status updates
+- General notifications
+- Neutral messages
+
+**Visual Style:**
+- Background: Light blue (#E3F2FD)
+- Text: Dark blue (#0D47A1)
+- Border: Blue (#2196F3, 2.0px)
+
+### showComicWarningSnackBar
+
+Displays a warning message with orange color scheme.
+
+```dart
+showComicWarningSnackBar(context, T.pleaseCheckInput);
+```
+
+**Use Cases:**
+- Warning messages
+- Cautionary notices
+- Input validation warnings
+- Non-critical issues
+
+**Visual Style:**
+- Background: Light orange (#FFF3E0)
+- Text: Dark orange (#E65100)
+- Border: Orange (#FF9800, 2.0px)
+
+## Usage Examples
+
+### Basic Success Message
+
+```dart
+// After successful form submission
+final user = await philgoApiUserUpdate(data);
+if (mounted) {
+  AppState.of(context).setUser(user);
+  showComicSuccessSnackBar(context, T.profileUpdateSuccess);
+}
+```
+
+### Validation Error
+
+```dart
+// Form validation
+if (_nicknameController.text.trim().isEmpty) {
+  showComicErrorSnackBar(context, T.nicknameRequired);
+  return;
+}
+```
+
+### Error Handling
+
+```dart
+try {
+  await philgoApiFileDelete(photoUrl);
+  showComicSuccessSnackBar(context, T.photoDeleted);
+} catch (e) {
+  showComicErrorSnackBar(context, 'Failed to delete: $e');
+}
+```
+
+### Info Message
+
+```dart
+// Processing indicator
+showComicInfoSnackBar(context, T.processingRequest);
+await performLongOperation();
+```
+
+## Design Specifications
+
+| Property | Value | Description |
+|----------|-------|-------------|
+| **Border Width** | 2.0px | Comic standard thickness |
+| **Border Radius** | 12px | Rounded corners |
+| **Elevation** | 0 | Flat design (no shadow) |
+| **Behavior** | Floating | SnackBar floats above content |
+| **Margin** | 16px all sides | Space from screen edges |
+| **Padding** | Horizontal: 16px, Vertical: 12px | Content spacing |
+| **Text Style** | bodyMedium | Theme text style |
+
+## Comparison: Before vs After
+
+### ❌ Before (Non-Comic Style)
+
+```dart
+// Old style: Inline styling, no border, inconsistent
+ScaffoldMessenger.of(context).showSnackBar(
+  SnackBar(
+    content: Text(T.nicknameRequired),
+    backgroundColor: Theme.of(context).colorScheme.error,
+  ),
+);
+```
+
+### ✅ After (Comic Style)
+
+```dart
+// Comic style: Consistent design, proper border, theme-based
+showComicErrorSnackBar(context, T.nicknameRequired);
+```
+
+## Best Practices
+
+- **Always** use Comic SnackBar functions instead of creating SnackBars manually
+- **Choose** the appropriate function based on message type:
+  - Success: `showComicSuccessSnackBar`
+  - Error/Validation: `showComicErrorSnackBar`
+  - Info/Neutral: `showComicInfoSnackBar`
+  - Warning/Caution: `showComicWarningSnackBar`
+- **Pass** localized text (T.xxx or Lo.xxx) instead of hardcoded strings
+- **Check** `mounted` before showing SnackBar in async operations
+- **Never** create SnackBars with inline styling or hardcoded colors
+
+## File Location
+
+Comic SnackBar helper functions are defined in:
+`./lib/widgets/theme/comic_snackbar.dart`
+
+Import:
+```dart
+import 'package:philgo/widgets/theme/comic_snackbar.dart';
+```
+
 
 # Scripts
 
