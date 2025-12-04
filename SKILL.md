@@ -3,7 +3,7 @@ name: flutter-design-skill
 description: This skill provides the Comic style UI design guideline and code to make the Flutter app look better. ALWAYS use this skill when the user asks to create, update, design, modify, or build any page, screen, widget, or UI component in a Flutter application.
 ---
 
-# Flutter Deisgn Overview
+# Flutter Design Overview
 
 - This skill provides the Comic style UI design guideline and code.
 - It ensures that the Flutter application will have Comic UI style.
@@ -226,6 +226,113 @@ Card(
   ),
 )
 ```
+
+# ComicModalBottomSheet
+
+## Concept & Intent
+
+The **ComicModalBottomSheet** is a reusable modal bottom sheet component that implements the Comic design language. It provides a consistent way to display modal content from the bottom of the screen with Comic-style rounded top corners, proper spacing, and an integrated drag handle.
+
+## Design Principles
+
+- **Border Radius**: `12.0` for top-left and top-right corners (creates Comic-style rounded top)
+- **Border Width**: `2.0` thickness on top, left, and right sides (no border on bottom)
+- **Elevation**: `0` (flat design, no shadows)
+- **Colors**: Theme-based (surface background, outline border)
+- **Spacing**: Consistent padding using multiples of 8
+- **Drag Handle**: Custom drag handle integrated inside the container (32px × 4px)
+
+## Usage
+
+```dart
+// Show Comic Modal Bottom Sheet with integrated drag handle
+showModalBottomSheet(
+  context: context,
+  backgroundColor: Colors.transparent, // Comic Design: transparent for custom styling
+  elevation: 0, // Comic Design: no shadow
+  builder: (context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(12.0), // Comic Design: rounded top corners
+          topRight: Radius.circular(12.0),
+        ),
+        border: Border(
+          top: BorderSide(
+            color: Theme.of(context).colorScheme.outline,
+            width: 2.0, // Comic Design: 2.0 border
+          ),
+          left: BorderSide(
+            color: Theme.of(context).colorScheme.outline,
+            width: 2.0,
+          ),
+          right: BorderSide(
+            color: Theme.of(context).colorScheme.outline,
+            width: 2.0,
+          ),
+          // No bottom border
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Drag handle indicator
+          // Comic Design: 8px spacing from top
+          const SizedBox(height: 8),
+          Container(
+            width: 32,
+            height: 4,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(height: 8),
+          // Your content here (wrapped in Flexible if scrollable)
+          Flexible(
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                // Your list items
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  },
+);
+```
+
+## Key Features
+
+- **Rounded Top Corners**: 12.0 radius on top-left and top-right for Comic style
+- **Selective Borders**: Border on top, left, and right only (no bottom border)
+- **Theme Integration**: Uses Theme colors for surface and outline
+- **No Shadow**: Elevation set to 0 for flat design
+- **Transparent Background**: Parent backgroundColor set to transparent for custom styling
+- **Integrated Drag Handle**: Custom drag handle (32×4px) with proper spacing inside the container
+- **Flexible Layout**: Uses Column with MainAxisSize.min and Flexible for proper sizing
+
+## Drag Handle Specifications
+
+- **Size**: 32px wide × 4px tall
+- **Color**: `onSurfaceVariant` with 40% opacity
+- **Border Radius**: 2px for rounded corners
+- **Spacing**: 8px top and bottom (multiples of 8)
+- **Position**: Inside the container, above the content
+
+## Best Practices
+
+- Always use `backgroundColor: Colors.transparent` in `showModalBottomSheet`
+- Apply `elevation: 0` to maintain flat design
+- Use Theme colors for consistency
+- Wrap the Container's child in a Column with `mainAxisSize: MainAxisSize.min`
+- Add the drag handle as the first element in the Column
+- Use `Flexible` wrapper for scrollable content (ListView, GridView, etc.)
+- Use `shrinkWrap: true` for ListView to allow proper sizing
+- Add appropriate spacing (multiples of 8) around content
 
 
 # Scripts
