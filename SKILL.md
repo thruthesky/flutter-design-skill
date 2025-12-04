@@ -369,7 +369,7 @@ For list-based content such as `ListTile` and `Compact Cards`:
 
 ## Design Principles
 
-- **Border**: Use `1.5` thickness (thinner than standard 2.0) for lighter visual weight in compact lists
+- **Border**: Use `1.0` thickness (thinner than standard 2.0) for lighter visual weight in compact lists
 - **Border Radius**: `12` for rounded corners
 - **Elevation**: `0` (no shadow)
 - **Margin**: `EdgeInsets.zero` (parent controls spacing)
