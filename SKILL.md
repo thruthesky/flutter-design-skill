@@ -509,14 +509,14 @@ showModalBottomSheet(
 
 ## Concept & Intent
 
-The **Comic AppBar** implements the Comic design language for app bars and header sections. It provides consistent styling with a characteristic 2.0px bottom border using the outline color, creating a clear visual separation between the header and content areas.
+The **Comic AppBar** implements the Comic design language for app bars and header sections. It provides consistent styling with a characteristic 1.0px bottom border using the outlineVariant color, creating a subtle visual separation between the header and content areas that matches the bottom navigation bar style.
 
 ## Design Principles
 
-- **Border**: 2.0px bottom border with outline color
+- **Border**: 1.0px bottom border with outlineVariant color (matches bottom navigation bar)
 - **Typography**: Use Theme titleLarge text style for titles
 - **Height**: Standard AppBar height (56px) or custom heights for special cases
-- **Colors**: Theme-based (surface background, outline border, onSurface text)
+- **Colors**: Theme-based (surface background, outlineVariant border, onSurface text)
 - **No Elevation**: Always 0 (flat design, no shadows)
 
 ## Usage Patterns
@@ -531,7 +531,7 @@ Scaffold(
     title: Text(T.editProfile, style: theme.textTheme.titleLarge),
     bottom: PreferredSize(
       preferredSize: const Size.fromHeight(1),
-      child: Container(height: 2, color: scheme.outline),
+      child: Container(height: 1, color: scheme.outlineVariant),
     ),
   ),
   body: // Your content here
@@ -541,8 +541,8 @@ Scaffold(
 **Key Features:**
 - Uses standard `AppBar` widget
 - Title uses `titleLarge` text style from Theme
-- Bottom border achieved using `PreferredSize` with 2.0px height Container
-- Border color uses Theme `outline` color
+- Bottom border achieved using `PreferredSize` with 1.0px height Container
+- Border color uses Theme `outlineVariant` color (matches bottom navigation bar)
 
 ### Pattern 2: Custom Header (Without Scaffold)
 
@@ -556,9 +556,9 @@ SafeArea(
     decoration: BoxDecoration(
       border: Border(
         bottom: BorderSide(
-          // Comic Design: 2.0px border with outline color
-          color: Theme.of(context).colorScheme.outline,
-          width: 2.0,
+          // Comic Design: 1.0px border with outlineVariant color (matches bottom nav)
+          color: Theme.of(context).colorScheme.outlineVariant,
+          width: 1.0,
         ),
       ),
     ),
@@ -593,7 +593,7 @@ SafeArea(
 - Wrapped in `SafeArea` for proper top spacing
 - Height set to 56px (standard AppBar height)
 - Padding adjusts for left/right spacing
-- Border applied only to bottom (2.0px with outline color)
+- Border applied only to bottom (1.0px with outlineVariant color, matches bottom navigation bar)
 - Title uses `titleLarge` text style
 - Supports action buttons via `IconButton` or other widgets
 
@@ -603,8 +603,8 @@ SafeArea(
 |----------|-------|-------------|
 | **Height** | 56px | Standard AppBar height |
 | **Border Position** | Bottom only | Visual separation from content |
-| **Border Width** | 2.0px | Comic standard thickness |
-| **Border Color** | `colorScheme.outline` | Theme outline color |
+| **Border Width** | 1.0px | Subtle border matching bottom navigation bar |
+| **Border Color** | `colorScheme.outlineVariant` | Theme outlineVariant color (matches bottom nav) |
 | **Title Style** | `titleLarge` | Theme text style |
 | **Elevation** | 0 | Flat design (no shadow) |
 | **Padding** | Left: 12px, Right: 4px | Balanced spacing for text and icons |
@@ -633,8 +633,8 @@ SafeArea(
     decoration: BoxDecoration(
       border: Border(
         bottom: BorderSide(
-          color: Theme.of(context).colorScheme.outline,
-          width: 2.0,
+          color: Theme.of(context).colorScheme.outlineVariant,
+          width: 1.0,
         ),
       ),
     ),
@@ -670,8 +670,8 @@ SafeArea(
 
 ## Best Practices
 
-- **Always** use Theme colors (outline for border, titleLarge for text)
-- **Always** set border width to 2.0px for consistency
+- **Always** use Theme colors (outlineVariant for border, titleLarge for text)
+- **Always** set border width to 1.0px for consistency with bottom navigation bar
 - **Always** apply border only to the bottom (not top/left/right)
 - **Always** use SafeArea when implementing custom headers
 - **Never** add elevation or shadows
